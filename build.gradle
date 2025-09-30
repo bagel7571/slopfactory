@@ -19,7 +19,7 @@ group = mod_group_id
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://api.modrinth.com/maven") }
+    maven { url = uri("https://maven.tterrag.com/") } // Create’s official repo
 }
 
 base {
@@ -113,8 +113,8 @@ configurations {
 }
 
 dependencies {
-    compileOnly "maven.modrinth:create:6.0.6+mc1.21.1"
-    runtimeOnly "maven.modrinth:create:6.0.6+mc1.21.1"
+    compileOnly "com.simibubi.create:create-1.21.1:6.0.6"
+    runtimeOnly "com.simibubi.create:create-1.21.1:6.0.6"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
