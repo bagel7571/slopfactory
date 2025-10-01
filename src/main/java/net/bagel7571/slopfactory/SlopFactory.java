@@ -1,5 +1,8 @@
 package net.bagel7571.slopfactory;
 
+import net.bagel7571.slopfactory.block.ModBlocks;
+import net.bagel7571.slopfactory.item.ModCreativeModeTabs;
+import net.bagel7571.slopfactory.item.ModItems;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -46,6 +49,10 @@ public class SlopFactory {
         // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
+
+        ModCreativeModeTabs.register(modEventBus);
+        ModBlocks.register(modEventBus);
+        ModItems.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
