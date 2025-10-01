@@ -8,6 +8,7 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ModBlockLootTableProvider extends BlockLootSubProvider {
     protected ModBlockLootTableProvider(HolderLookup.Provider registries) {
@@ -17,10 +18,6 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
         dropSelf(ModBlocks.MEAT_BLOCK.get());
-
-        // remove comment when ore block & crystal is added
-        // add(ModBlocks.AQUALITE_ORE.get(),
-        //         block -> createOreDrop(ModBlocks.AQUALITE_ORE.get(), ModItems.AQUALITE_CRYSTAL.get()));
     }
 
     @Override
