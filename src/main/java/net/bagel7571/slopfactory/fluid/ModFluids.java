@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
@@ -21,6 +22,8 @@ import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
+
+import java.util.function.Supplier;
 
 public class ModFluids {
     public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.FLUID_TYPES, SlopFactory.MOD_ID);
@@ -32,15 +35,24 @@ public class ModFluids {
             () -> new FluidType(FluidType.Properties.create().descriptionId("fluid.meatemulsion")));
 
     public static final DeferredHolder<Fluid, FlowingFluid> MEAT_EMULSION_SOURCE = FLUIDS.register("meat_emulsion_source",
-            () -> new BaseFlowingFluid.Source(liquidProperties()));
+            () -> new BaseFlowingFluid.Source(LIQUID_PROPERTIES.get()));
     public static final DeferredHolder<Fluid, FlowingFluid> MEAT_EMULSION_FLOWING = FLUIDS.register("meat_emulsion_flowing",
-            () -> new BaseFlowingFluid.Flowing(liquidProperties()));
+            () -> new BaseFlowingFluid.Flowing(LIQUID_PROPERTIES.get()));
 
     public static final DeferredHolder<Item, BucketItem> MEAT_EMULSION_BUCKET = BUCKETS.register("meat_emulsion_bucket",
             () -> new BucketItem(MEAT_EMULSION_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     public static final DeferredHolder<Block, LiquidBlock> MEAT_EMULSION_BLOCK = SOURCEBLOCKS.register("meat_emulsion_block",
-            () -> new LiquidBlock(MEAT_EMULSION_SOURCE.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
+            () -> new LiquidBlock(MEAT_EMULSION_SOURCE.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PINK)
+                    .strength(100.0f)
+                    .noLootTable()
+                    .noCollission()
+                    .replaceable()
+                    .liquid()));
+
+
+
 
     public static void register(IEventBus eventBus) {
         FLUID_TYPES.register(eventBus);
@@ -67,7 +79,4 @@ public class ModFluids {
     }
 
 
-    private static Properties liquidProperties() {
-        return new Properties(MEAT_EMULSION_TYPE, MEAT_EMULSION_SOURCE, MEAT_EMULSION_FLOWING).bucket(MEAT_EMULSION_BUCKET).block(MEAT_EMULSION_BLOCK);
-    }
 }
