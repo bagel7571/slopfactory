@@ -26,6 +26,8 @@ public class ModBlocks {
                     .mapColor(MapColor.TERRACOTTA_WHITE).strength(0.8F).sound(SoundType.CORAL_BLOCK)));
 
 
+
+
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);

@@ -1,5 +1,7 @@
 package net.bagel7571.slopfactory.datagen;
 
+import com.simibubi.create.api.data.recipe.MechanicalCraftingRecipeBuilder;
+import com.simibubi.create.api.data.recipe.MixingRecipeGen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -24,6 +26,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         //        .define('I', Items.PACKED_ICE)
         //        .unlockedBy("has_prismarine", has(Items.PRISMARINE_SHARD))
         //        .save(recipeOutput);
+
 
     }
 }
